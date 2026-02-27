@@ -1,4 +1,4 @@
-```bash
+```yara
  ██████╗██╗   ██╗██████╗ ███████╗██████╗ ███████╗██╗  ██╗██╗███╗   ██╗██╗ ██████╗  █████╗ ███╗   ███╗██╗
 ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔════╝██║  ██║██║████╗  ██║██║██╔════╝ ██╔══██╗████╗ ████║██║
 ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝███████╗███████║██║██╔██╗ ██║██║██║  ███╗███████║██╔████╔██║██║
@@ -7,19 +7,16 @@
  ╚═════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝
 -------------------------------------------------------------------------------------------------------------
 > SYSTEM STATUS: ONLINE
-> MODE: CYBER OPERATIONS
-> VAULT: ACTIVE
+> MODE: MALWARE DETECTION ENGINEERING
+> MODULE: YARA SIGNATURE DEVELOPMENT
 -------------------------------------------------------------------------------------------------------------
 ```
----
-title:  YARA Rules
-created: Wednesday 2nd July 2025 11:03
-Last modified: Wednesday 2nd July 2025 11:03
-Aliases: 
-Tags:
-
----
-# YARA Rules
+# YARA RULE DEVELOPMENT NODE
+```text
+FILE: yara_rules.md
+PURPOSE: Detection logic engineering
+FRAMEWORK: YARA 4.x
+FOCUS: Static malware detection & pattern matching
 ```
 
  
