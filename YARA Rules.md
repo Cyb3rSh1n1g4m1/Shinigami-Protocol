@@ -131,7 +131,7 @@ rule JumpExample
 
 In the example above we have a pair of numbers enclosed in square brackets and separated by a hyphen, that's a jump. This jump is indicating that any arbitrary sequence from 4 to 6 bytes can occupy the position of the jump. Any of the following strings will match the pattern:
 
-```HEX
+```hex
 F4 23 01 02 03 04 62 B4
 F4 23 00 00 00 00 00 62 B4
 F4 23 15 82 A3 04 45 22 62 B4
@@ -141,7 +141,7 @@ Any jump [X-Y] must meet the condition 0 <= X <= Y. In previous versions of YARA
 
 These are valid jumps:
 
-```
+```hex
 FE 39 45 [0-8] 89 00
 FE 39 45 [23-45] 89 00
 FE 39 45 [1000-2000] 89 00
@@ -149,26 +149,26 @@ FE 39 45 [1000-2000] 89 00
 
 This is invalid:
 
-```
+```hex
 FE 39 45 [10-7] 89 00
 ```
 
 If the lower and higher bounds are equal you can write a single number enclosed in brackets, like this:
 
-```
+```hex
 FE 39 45 [6] 89 00
 ```
 
 The above string is equivalent to both of these:
 
-```
+```hex
 FE 39 45 [6-6] 89 00
 FE 39 45 ?? ?? ?? ?? ?? ?? 89 00
 ```
 
 Starting with YARA 2.0 you can also use unbounded jumps:
 
-```
+```hex
 FE 39 45 [10-] 89 00
 FE 39 45 [-] 89 00
 ```
