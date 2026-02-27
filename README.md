@@ -1,4 +1,4 @@
-```bash
+```ruby
  ██████╗██╗   ██╗██████╗ ███████╗██████╗ ███████╗██╗  ██╗██╗███╗   ██╗██╗ ██████╗  █████╗ ███╗   ███╗██╗
 ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔════╝██║  ██║██║████╗  ██║██║██╔════╝ ██╔══██╗████╗ ████║██║
 ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝███████╗███████║██║██╔██╗ ██║██║██║  ███╗███████║██╔████╔██║██║
@@ -11,7 +11,7 @@
 > VAULT: ACTIVE
 -------------------------------------------------------------------------------------------------------------
 ```
-```text
+```go
                     .....::::----:::----===---:: =========---::::::::::......                       
                     ...:::-------==++++==-:.          -: :-====-------::::...                       
                    .::::---=====++++-.                        -+++===------:...                     
@@ -73,7 +73,7 @@
 
 # ⛧ CYB3R$H1N1G4M1 // INTELLIGENCE COMMAND NODE ⛧
 
-```text
+```json
 ────────────────────────────────────────────────────────────
  NODE STATUS      : ACTIVE
  OPERATION MODE   : THREAT INTELLIGENCE DEVELOPMENT
@@ -86,7 +86,7 @@
 
 ## ▌MISSION DIRECTIVE
 
-```text
+```json
 OBJECTIVE:
     Build and operate a structured Cyber Threat Intelligence lab.
 
@@ -107,7 +107,7 @@ This repository serves as a live CTI development environment blending cyberpunk 
 
 ## ▌OPERATIONAL MODULES
 
-```text
+```go
 [ MODULE_01 ] THREAT ACTOR DOSSIERS
 ```
 
@@ -119,7 +119,7 @@ This repository serves as a live CTI development environment blending cyberpunk 
 
 ---
 
-```text
+```go
 [ MODULE_02 ] CAMPAIGN RECONSTRUCTION
 ```
 
@@ -133,7 +133,7 @@ Every intrusion leaves a pattern. This node isolates it.
 
 ---
 
-```text
+```go
 [ MODULE_03 ] AUTOMATION SYSTEMS
 ```
 
@@ -146,7 +146,7 @@ Automation is operational acceleration.
 
 ---
 
-```text
+```go
 [ MODULE_04 ] INTELLIGENCE REPORTING
 ```
 
@@ -162,7 +162,7 @@ Clarity is power.
 
 ## ▌NODE ARCHITECTURE
 
-```text
+```json
 /
 ├── threat-actors/
 ├── campaign-analysis/
@@ -178,7 +178,7 @@ Structured for growth. Designed for clarity. Built for iteration.
 
 ## ▌TECH STACK
 
-```text
+```json
 LANGUAGES     : Python
 FRAMEWORKS    : MITRE ATT&CK
 DATA SOURCES  : OSINT + Public Intelligence APIs
@@ -190,7 +190,7 @@ FOCUS         : Analytical Tradecraft + Automation
 
 ## ▌DEVELOPMENT ROADMAP
 
-```text
+```lua
 PHASE_01:
     • 3 Threat Actor Dossiers
     • 1 Full Campaign Reconstruction
@@ -211,7 +211,7 @@ PHASE_03:
 
 ## ▌FINAL STATE
 
-```text
+```lua
 GOAL:
     Demonstrate analytical depth, technical capability,
     and operational CTI readiness within a structured framework.
