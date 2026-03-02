@@ -120,3 +120,53 @@ You can analyze:
 - PowerShell execution patterns
     
 - SEO poisoning ecosystems
+
+# Threat Actor Dossier: TA571 (Initial Access / Malware Distribution)
+
+## Executive Risk Summary
+TA571 is a high-volume initial access / malware distribution cluster associated with web-based social engineering and delivery chains. ClickFix-style lures (fake verification / copy-paste PowerShell) have been observed in campaigns tied to TA571 and related website compromise clusters. This presents high operational risk because it bypasses email controls and relies on user execution.  (Sources: Proofpoint, Microsoft) :contentReference[oaicite:4]{index=4}
+
+## Common Initial Access Pattern (ClickFix)
+- Victim visits compromised/malicious site → fake CAPTCHA/verification lure
+- Clipboard injection instructs Win+R paste/run
+- PowerShell executes remote retrieval and staging
+- Follow-on payloads often include stealers/loaders/RATs depending on campaign objectives :contentReference[oaicite:5]{index=5}
+
+## Zero Trust Violations (What the tradecraft exploits)
+- Implicit trust in user actions (“verify you’re human”)
+- Default allow for script interpreters (PowerShell) on endpoints
+- Telemetry gaps (lack of command-line/process logging, weak DNS/HTTP logging)
+- Weak egress controls enabling staged payload retrieval
+
+## ATT&CK Mapping (Core)
+- T1189 Drive-by Compromise
+- T1204 User Execution
+- T1059.001 PowerShell
+- T1105 Ingress Tool Transfer
+- T1071 Web Protocols
+
+## Detection & Telemetry Requirements
+**Endpoint**
+- Process creation (4688/Sysmon EID 1), PowerShell Script Block Logging (4104), AMSI integration
+**Network**
+- DNS logs, proxy/HTTP logs, URL categorization, TLS inspection where allowed
+**Identity**
+- Correlate endpoint infection with suspicious sign-ins post-compromise
+
+## OpenCTI Queries
+- threat-actor:TA571 AND technique:T1189
+- threat-actor:TA571 AND (indicator:* OR infrastructure:*)
+
+## Axonius Validation Queries
+- where process.name="powershell.exe" AND process.command_line contains_any ("-w hidden","-enc","DownloadString","IEX")
+- where device.internet_exposed=true AND browser.installed=true
+
+## Threat Hunting Hypothesis
+**Hypothesis:** Users are being coerced into executing clipboard-delivered PowerShell resulting in staged download/execution.
+
+**KQL (Microsoft Sentinel) – suspicious PowerShell with hidden/encoded**
+```kql
+DeviceProcessEvents
+| where FileName =~ "powershell.exe"
+| where ProcessCommandLine has_any ("-enc","-encodedcommand","-w hidden","DownloadString","IEX")
+| project Timestamp, DeviceName, AccountName, InitiatingProcessFileName, ProcessCommandLine
