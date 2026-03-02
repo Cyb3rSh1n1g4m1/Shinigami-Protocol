@@ -98,3 +98,57 @@ You can build:
 - Suspicious RMM installation hunting
     
 - Persistence mechanism analysis
+
+
+---
+
+# 5) `threat-actors/Storm-1811/dossier.md`
+```md
+# Threat Actor Dossier: Storm-1811 (Financially Motivated / Social Engineering + RMM)
+
+## Executive Risk Summary
+Storm-1811 is a financially motivated actor linked to ransomware outcomes and known for social engineering initial access methods, including impersonation and abuse of remote support tooling (e.g., Microsoft Quick Assist) to establish interactive access on victim endpoints. (Sources: Microsoft, MITRE, Red Canary) :contentReference[oaicite:6]{index=6}
+
+## Primary Initial Access Pattern (RMM / Remote Support Abuse)
+- Social engineering (often via messaging/calls) impersonating IT/help desk
+- Convince user to accept remote session via Quick Assist / similar
+- Establish hands-on-keyboard access → deploy follow-on tooling → ransomware path :contentReference[oaicite:7]{index=7}
+
+## Relationship to “ClickFix-like” Attacks
+Storm-1811’s tradecraft sits in the same family of “user-assisted execution” patterns as ClickFix: the user is coerced into enabling access/executing steps that bypass technical controls. Microsoft documents ClickFix growth as a technique class; Storm-1811 demonstrates adjacent, currently exploited user-coercion for access. :contentReference[oaicite:8]{index=8}
+
+## Zero Trust Violations
+- Over-trust in help desk / remote support workflows
+- Lack of separation-of-duties for remote support approvals
+- Weak session auditing + lack of “remote tool allowed list”
+- Telemetry gaps around first-use of remote support tools
+
+## ATT&CK Mapping (Core)
+- T1219 Remote Access Software
+- T1566 Phishing (often paired with social engineering)
+- T1204 User Execution
+- T1059 Command and Scripting
+- T1078 Valid Accounts (post-foothold)
+
+## Detection & Telemetry Requirements
+- Endpoint: process creation, remote tool execution logs, service installs, scheduled tasks
+- Identity: MFA reset events, device registration, risky sign-ins
+- Network: outbound connections to remote support infrastructure, unusual RDP/SMB expansion
+
+## OpenCTI Queries
+- threat-actor:"Storm-1811" AND technique:T1219
+- threat-actor:"Storm-1811" AND (tool:* OR malware:* OR technique:*)
+
+## Axonius Validation Queries
+- where installed_software.name contains_any ("Quick Assist")
+- where process.name contains_any ("QuickAssist.exe") OR service.name contains "QuickAssist"
+
+## Threat Hunting Hypothesis
+**Hypothesis:** Remote support tooling is being initiated outside approved support channels as pre-ransomware foothold.
+
+**KQL – Quick Assist / remote tool execution**
+```kql
+DeviceProcessEvents
+| where FileName has_any ("QuickAssist.exe","TeamViewer.exe","AnyDesk.exe")
+| project Timestamp, DeviceName, AccountName, InitiatingProcessFileName, ProcessCommandLine
+| order by Timestamp desc
